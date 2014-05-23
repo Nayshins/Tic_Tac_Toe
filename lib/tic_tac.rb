@@ -17,5 +17,19 @@ class Player
 end
 
 class Board
-  
+  attr_accessor :grid
+
+  def initialize
+    @grid = create_grid 
+  end
+
+  private
+
+  def create_grid
+    grid = []
+    (1..9).each do |i|
+      grid << Cell.new(i)
+    end
+    grid
+  end
 end

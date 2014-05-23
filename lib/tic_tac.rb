@@ -15,3 +15,7 @@ class Player
     @team = player_args.fetch(:team)
   end
 end
+
+class Board
+  
+end

@@ -28,7 +28,7 @@ class Board
   def create_grid
     grid = []
     (1..9).each do |i|
-      grid << Cell.new(i)
+      grid << Cell.new
     end
     grid
   end

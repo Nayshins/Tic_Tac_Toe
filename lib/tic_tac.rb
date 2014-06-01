@@ -23,6 +23,14 @@ class Board
     @grid = create_grid 
   end
 
+  def get_cell(position)
+    grid[position]
+  end
+
+  def set_cell(position, value)
+    get_cell(position).value = value
+  end
+
   private
 
   def create_grid

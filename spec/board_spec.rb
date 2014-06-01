@@ -15,4 +15,16 @@ describe "Board" do
       @board.grid.first.should be_an_instance_of Cell
     end
   end
+
+  context "#get_cell" do
+    it "returns the a cell at a position on the board" do
+      @board.get_cell(1).should be_an_instance_of Cell
+    end
+  end
+  context "#set_cell" do
+    it "updates the value of the cell object at position 1 - 9" do
+      @board.set_cell(1,"X")
+      @board.get_cell(1).value.should eq("X")
+    end
+  end
 end

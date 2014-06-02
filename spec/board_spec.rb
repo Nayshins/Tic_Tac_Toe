@@ -15,7 +15,6 @@ describe "Board" do
       @board.grid.first.should be_an_instance_of Cell
     end
   end
-
   context "#get_cell" do
     it "returns the a cell at a position on the board" do
       @board.get_cell(1).should be_an_instance_of Cell

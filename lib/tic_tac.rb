@@ -1,3 +1,12 @@
+class Game
+  attr_accessor :board, :current_player, :other_player
+  def intialize(players,board = Board.new)
+    @players = players
+    @board = board
+    @current_player, @other_player = players.shuffle
+  end
+end
+
 class Cell
   attr_accessor :value
   
@@ -38,10 +47,17 @@ class Board
   end
 
   def winner?
+    winning_positions.each do |winning_position|
+      if grid_values(winning_position).reduce(:+) == "XXX" ||
+         grid_values(winning_position).reduce(:+) == "OOO"
+         return true
+      end
+    end
+    false
   end
 
   def draw?
-    @grid.each do |cell|
+    grid.each do |cell|
       return false if cell.value.empty?
     end
     true
@@ -56,4 +72,19 @@ class Board
     end
     grid
   end
+
+  def grid_values(winning_position)
+    winning_position.map { |cell| cell.value }
+  end
+
+  def winning_positions
+    check_grid = grid.each_slice(3).to_a
+    return check_grid + check_grid.transpose + diagonals
+  end
+
+  def diagonals
+    [[get_cell(0),get_cell(4),get_cell(8)],
+     [get_cell(6),get_cell(4),get_cell(2)]]
+  end
+
 end

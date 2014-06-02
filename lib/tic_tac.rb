@@ -31,6 +31,11 @@ class Board
     get_cell(position).value = value
   end
 
+  def game_over
+    return :winner if winner?
+    return :draw if draw?
+    false
+  end
   private
 
   def create_grid

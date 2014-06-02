@@ -20,7 +20,7 @@ class Board
   attr_accessor :grid
 
   def initialize
-    @grid = create_grid 
+    @grid = create_grid
   end
 
   def get_cell(position)
@@ -36,6 +36,17 @@ class Board
     return :draw if draw?
     false
   end
+
+  def winner?
+  end
+
+  def draw?
+    @grid.each do |cell|
+      return false if cell.value.empty?
+    end
+    true
+  end
+  
   private
 
   def create_grid

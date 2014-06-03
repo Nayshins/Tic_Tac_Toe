@@ -69,3 +69,7 @@ class Player
     @team = team
   end
 end
+
+class Game
+  
+end

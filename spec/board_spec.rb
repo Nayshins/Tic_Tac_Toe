@@ -80,4 +80,57 @@ describe "Board" do
                                        ['X',' ',' ']])
     end
   end
+
+  describe "#winner?" do
+
+    it "returns true when 3 in a row are the same" do
+      @board.grid = ['X','X','X',' ',' ',' ',' ',' ',' ']
+      @board.winner?.should be_true
+    end
+
+    it "returns true when 3 in a col are the same" do
+      @board.grid = ['X',' ',' ','X',' ',' ','X',' ',' ']
+      @board.winner?.should be_true
+    end
+
+    it "returns true when 3 in a diagonal are the same" do
+      @board.grid = ['X',' ',' ',' ','X',' ',' ',' ','X']
+      @board.winner?.should be_true
+    end
+
+    it "returns false when there is no winner" do
+      @board.grid = ['X','O','X',' ',' ',' ',' ',' ',' ']
+      @board.winner?.should be_false
+    end
+  end
+
+  describe "#draw?" do
+    it "returns true when there are no moves left" do
+      @board.grid = ['X','O','X','O','X','O','O','X','O']
+      @board.draw?.should be_true
+    end
+
+    it "returns false if there are still open spaces" do
+      @board.grid = ['X','O','X',' ',' ',' ',' ',' ',' ']
+      @board.draw?.should be_false
+    end
+  end
+
+  describe "#game_over?" do
+
+    it "returns true if there is a winner" do
+      @board.grid = ['X','X','X',' ',' ',' ',' ',' ',' ']
+      @board.game_over?.should be_true
+    end
+
+    it "returns true if there is a draw" do
+      @board.grid = ['X','O','X','O','X','O','O','X','O']
+      @board.game_over?.should be_true
+    end
+
+    it "returns false if there is no winer or draw" do
+      @board.grid = ['X','O','X',' ',' ',' ',' ',' ',' ']
+      @board.draw?.should be_false
+    end
+  end
 end

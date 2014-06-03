@@ -19,7 +19,7 @@ class Board
   end
 
   def make_solutions
-    @solutions = get_rows + get_cols +  get_diagonals
+    get_rows + get_cols +  get_diagonals
   end
 
   def get_rows
@@ -35,16 +35,30 @@ class Board
   end
 
   def print_grid
-   puts 
-   puts " #{grid[0]} | #{grid[1]} | #{grid[2]}"
-   puts "---+---+---"
-   puts " #{grid[3]} | #{grid[4]} | #{grid[5]}"
-   puts "---+---+---"
-   puts " #{grid[6]} | #{grid[7]} | #{grid[8]}"
-   puts
+    puts 
+    puts " #{grid[0]} | #{grid[1]} | #{grid[2]}"
+    puts "---+---+---"
+    puts " #{grid[3]} | #{grid[4]} | #{grid[5]}"
+    puts "---+---+---"
+    puts " #{grid[6]} | #{grid[7]} | #{grid[8]}"
+    puts
   end
 
+  def winner?
+    make_solutions.each do |solution|
+      next if solution[0] == ' '
+      return true if solution.all? { |ele| solution[0] == ele }
+    end
+    false
+  end
+
+  def draw?
+    return true if get_moves == []
+    false
+  end
+
+  def game_over?
+    winner? || draw?
+  end
 end
 
-board = Board.new
-board.print_grid

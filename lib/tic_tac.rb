@@ -70,6 +70,74 @@ class Player
   end
 end
 
-class Game
-  
+class Computer
+  attr_accessor :team
+
+  def initialize(team)
+    @team = team
+  end
+
 end
+
+class Game
+  attr_accessor :human_player, :computer, :current_player, :board
+
+  def initialize
+    @human_player = Player.new('X')
+    @computer = Computer.new('O')
+    @current_player = human_player
+    @next = computer
+    @board = Board.new
+  end
+
+  def game_loop
+    while @board.game_over? == false  
+      if current_player == human_player
+        get_human_move
+      else
+        computer_move
+      end
+      switch_players
+    end
+    puts "game over!"
+  end
+
+  def get_human_move
+    board.print_grid
+    valid_move = false
+    until valid_move
+      puts "select a square by entering 1-9"
+      selection = gets.chomp.to_i
+      if board.grid[selection-1] == ' '
+        board.grid[selection-1] = 'X'
+        valid_move = true
+        
+      else
+        puts "invalid move enter a different number"
+      end  
+    end
+  end
+
+  def computer_move
+    board.print_grid
+    valid_move = false
+    until valid_move
+      puts "select a square by entering 1-9"
+      selection = gets.chomp.to_i
+      if board.grid[selection-1] == ' '
+        board.grid[selection-1] = 'O'
+        valid_move = true
+      else
+        puts "invalid move enter a different number"
+      end  
+    end
+  end
+
+  def switch_players
+    @current_player, @next = @next, @current_playerga
+  end
+end
+
+game = Game.new
+
+game.game_loop

@@ -1,8 +1,3 @@
-# Create game class
-# create negamax search
-# => add alpha beta
-#
-
 class Board
   attr_accessor :grid, :solutions
   
@@ -58,7 +53,9 @@ class Board
   end
 
   def game_over?
-    winner? || draw?
+    return :winner if winner? 
+    return :draw if draw?
+    false
   end
 end
 
@@ -72,72 +69,106 @@ end
 
 class Computer
   attr_accessor :team
+  INFINITY = 1.0/0
 
   def initialize(team)
     @team = team
   end
 
+  def negamax(board,depth)
+    if board.game_over?
+    end
+  end
+
+  def board_value(board)
+    
+  end
 end
 
 class Game
-  attr_accessor :human_player, :computer, :current_player, :board
+  attr_accessor :human_player, :computer, :current_player, :board, :next_player
 
   def initialize
-    @human_player = Player.new('X')
-    @computer = Computer.new('O')
+    select_team
     @current_player = human_player
-    @next = computer
+    @next_player = computer
     @board = Board.new
+  end
+
+  def select_team
+    puts "Welcome to Tic Tac Toe"
+    puts "please enter 1 to be X and 2 to be O"
+    valid_entry = false
+    until valid_entry
+      entry = gets.chomp
+      case entry
+      when '1'
+        @human_player = Player.new('X')
+        @computer = Computer.new('O')
+        valid_entry = true
+      when '2'
+        @human_player = Player.new('O')
+        @computer = Computer.new('X')
+        valid_entry = true  
+      else
+        puts "Invalid entry, Please enter 1 to be X and 2 to be O"  
+      end 
+    end
   end
 
   def game_loop
     while @board.game_over? == false  
       if current_player == human_player
         get_human_move
+        switch_players
       else
-        computer_move
+        lazy_computer_move
+        switch_players
       end
-      switch_players
     end
-    puts "game over!"
+    game_over
   end
 
   def get_human_move
     board.print_grid
-    valid_move = false
-    until valid_move
-      puts "select a square by entering 1-9"
-      selection = gets.chomp.to_i
-      if board.grid[selection-1] == ' '
-        board.grid[selection-1] = 'X'
-        valid_move = true
-        
-      else
-        puts "invalid move enter a different number"
-      end  
+    puts "select a square by entering 1-9"
+    valid = false
+    until valid 
+      move = gets.chomp
+      return valid = true if validate_move(move) 
     end
   end
 
-  def computer_move
+  def validate_move(move)
+    if move =~ /\d/ && board.get_moves.include?(move.to_i - 1)
+      board.grid[move.to_i - 1] = human_player.team
+    else
+      puts "invalid move enter a different number"
+      false
+    end  
+  end
+
+  def lazy_computer_move
     board.print_grid
-    valid_move = false
-    until valid_move
-      puts "select a square by entering 1-9"
-      selection = gets.chomp.to_i
-      if board.grid[selection-1] == ' '
-        board.grid[selection-1] = 'O'
-        valid_move = true
-      else
-        puts "invalid move enter a different number"
-      end  
-    end
+    puts "Computer making its move..."
+    possible_moves = board.get_moves
+    board.grid[possible_moves.first] = computer.team
   end
 
   def switch_players
-    @current_player, @next = @next, @current_playerga
+    @current_player, @next_player = @next_player, @current_player
+  end
+
+  def game_over
+    if board.game_over? == :winner
+      board.print_grid
+      puts "#{@next_player.team} is the winner!"
+    else
+      board.print_grid
+      puts "Draw!"
+    end  
   end
 end
 
 game = Game.new
-
 game.game_loop

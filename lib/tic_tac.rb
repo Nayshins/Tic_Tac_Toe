@@ -10,7 +10,7 @@ class Board
   end
 
   def get_moves
-    return locations(' ')
+    locations(' ')
   end
 
   def set_move(move,team)
@@ -151,8 +151,8 @@ class Game
   end
 
   def select_team
-    puts "Welcome to Tic Tac Toe"
-    puts "please enter 1 to be X and 2 to be O"
+    puts "Welcome to Unbeatable Tic Tac Toe..."
+    puts "Please enter 1 to be X and 2 to be O"
     valid_entry = false
     until valid_entry
       entry = gets.chomp
@@ -196,7 +196,8 @@ class Game
 
   def validate_move(move)
     if move =~ /\d/ && board.get_moves.include?(move.to_i - 1)
-      board.grid[move.to_i - 1] = human_player.team
+      move = move.to_i - 1
+      board.set_move(move, human_player.team)
     else
       puts "invalid move enter a different number"
       false
@@ -205,7 +206,7 @@ class Game
 
   def computer_move
     board.print_grid
-    puts "Computer making its move..."
+    puts "Computer is making its move..."
     move = computer.make_move(board,computer.team)
     board.set_move(move,computer.team)
   end
@@ -225,6 +226,5 @@ class Game
   end
 end
 
-game = Game.new
 
 

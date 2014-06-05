@@ -18,7 +18,7 @@ class Game
 
   def select_team
     team = { '1' => 'X', '2' => 'O'}
-    puts "Please enter 1 to be X and 2 to be O"
+    puts "Please enter 1 to be X or 2 to be O"
     valid_entry = false
     until valid_entry
       entry = gets.chomp

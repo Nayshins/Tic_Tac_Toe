@@ -143,15 +143,16 @@ class Game
   attr_accessor :human_player, :computer, :current_player, :board, :next_player
 
   def initialize
-    select_team
-    @current_player = human_player
-    @next_player = computer
     @board = Board.new
+  end
+
+  def start_game
+    puts "Welcome to Unbeatable Tic Tac Toe..."
+    select_team
     game_loop
   end
 
   def select_team
-    puts "Welcome to Unbeatable Tic Tac Toe..."
     puts "Please enter 1 to be X and 2 to be O"
     valid_entry = false
     until valid_entry
@@ -169,6 +170,12 @@ class Game
         puts "Invalid entry, Please enter 1 to be X and 2 to be O"  
       end 
     end
+  end
+
+  def first?
+    shuffle_array = [human_player,computer_player]
+    shuffle_array.shuffle
+    @current_player, @next_player = shuffle_array[0], shuffle_array[1]
   end
 
   def game_loop

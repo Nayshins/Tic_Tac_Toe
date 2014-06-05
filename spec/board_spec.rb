@@ -104,6 +104,17 @@ describe "Board" do
     end
   end
 
+  describe "#win_test" do
+    it "returns true when there is a winner of a certain team" do
+      @board.grid = ['X','X','X',' ',' ',' ',' ',' ',' ']
+      @board.win_test('X').should be_true
+    end
+    it "returns false when there is not a winner" do
+      @board.grid = ['X','O','X',' ',' ',' ',' ',' ',' ']
+      @board.win_test('X').should be_false
+    end
+  end
+
   describe "#draw?" do
     it "returns true when there are no moves left" do
       @board.grid = ['X','O','X','O','X','O','O','X','O']

@@ -13,6 +13,14 @@ class Board
     return locations(' ')
   end
 
+  def set_move(move,team)
+    grid[move] = team
+  end
+
+  def undo_move(move)
+    grid[move] = ' '
+  end
+
   def make_solutions
     get_rows + get_cols +  get_diagonals
   end
@@ -47,6 +55,14 @@ class Board
     false
   end
 
+  def win_test(team)
+    make_solutions.each do |solution|
+      next if solution[0] == ' ' || solution[0] != team
+      return true if solution.all? { |ele| team == ele }
+    end
+    false
+  end
+
   def draw?
     return true if get_moves == []
     false
@@ -69,19 +85,57 @@ end
 
 class Computer
   attr_accessor :team
-  INFINITY = 1.0/0
 
   def initialize(team)
     @team = team
   end
 
-  def negamax(board,depth)
+  def minimax(board,team,depth)
+    opponent = get_opponent(team)
+    best_score = -1.0/0
     if board.game_over?
+      return board_utility(board, team) / depth
+    else
+      board.get_moves.each do |move|
+        board.set_move(move,team)
+        score = -minimax(board, opponent, depth + 1)
+        board.undo_move(move)
+        if score > best_score
+          best_score = score
+        end
+      end
+      return best_score
     end
   end
 
-  def board_value(board)
-    
+  def make_move(board, team)
+    best_move = nil
+    best_score = -1.0/0
+    opponent = get_opponent(team)
+    board.get_moves.each do |move|
+      board.set_move(move,team)
+      score = -minimax(board, opponent, 1)
+      board.undo_move(move)
+      if score > best_score
+        best_score = score
+        best_move = move
+      end
+    end
+    return best_move
+  end
+
+  def get_opponent(team)
+    team == 'X' ? 'O' : 'X'
+  end
+
+  def board_utility(board, team)
+    if board.win_test(team)
+      return 1.0
+    elsif board.win_test(team == 'X' ? 'O' : 'X')  #ugh hate this 
+      return -1.0
+    else
+      return 0.0
+    end  
   end
 end
 
@@ -93,6 +147,7 @@ class Game
     @current_player = human_player
     @next_player = computer
     @board = Board.new
+    game_loop
   end
 
   def select_team
@@ -117,12 +172,12 @@ class Game
   end
 
   def game_loop
-    while @board.game_over? == false  
+    while board.game_over? == false  
       if current_player == human_player
         get_human_move
         switch_players
       else
-        lazy_computer_move
+        computer_move
         switch_players
       end
     end
@@ -148,11 +203,11 @@ class Game
     end  
   end
 
-  def lazy_computer_move
+  def computer_move
     board.print_grid
     puts "Computer making its move..."
-    possible_moves = board.get_moves
-    board.grid[possible_moves.first] = computer.team
+    move = computer.make_move(board,computer.team)
+    board.set_move(move,computer.team)
   end
 
   def switch_players
@@ -162,7 +217,7 @@ class Game
   def game_over
     if board.game_over? == :winner
       board.print_grid
-      puts "#{@next_player.team} is the winner!"
+      puts "#{next_player.team} is the winner!"
     else
       board.print_grid
       puts "Draw!"
@@ -171,4 +226,5 @@ class Game
 end
 
 game = Game.new
-game.game_loop
+
+

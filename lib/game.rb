@@ -1,6 +1,10 @@
 class Game
   attr_accessor :human_player, :computer, :current_player, :board, :next_player
 
+  @@move_map = {'1' => 0, '2' => 1, '3' => 2,
+                '4' => 3, '5' => 4, '6' => 6,
+                '7' => 6, '8' => 7, '9' => 8}
+
   def initialize
     @board = Board.new
   end
@@ -13,16 +17,16 @@ class Game
   end
 
   def select_team
+    team = { '1' => 'X', '2' => 'O'}
     puts "Please enter 1 to be X and 2 to be O"
     valid_entry = false
     until valid_entry
       entry = gets.chomp
-      case entry
-      when '1'
+      if team[entry] == 'X'
         @human_player = Player.new('X')
         @computer = Computer.new('O')
         valid_entry = true
-      when '2'
+      elsif team[entry] == 'O'
         @human_player = Player.new('O')
         @computer = Computer.new('X')
         valid_entry = true  
@@ -60,9 +64,8 @@ class Game
   end
 
   def validate_move(move)
-    if move =~ /\d/ && board.get_moves.include?(move.to_i - 1)
-      move = move.to_i - 1
-      board.set_move(move, human_player.team)
+    if board.get_moves.include?(@@move_map[move])
+      board.set_move(@@move_map[move], human_player.team)
     else
       puts "invalid move enter a different number"
       false

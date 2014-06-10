@@ -17,7 +17,7 @@ $ rspec spec
 into your console.
 
 #TODO
-1. Clean up the Game class. It could use soem more love
+1. Extrapolate game class 
 2. Add alpha beta to the minimax algorithm
 3. add the functionality to play another human instead of the computer
 4. More TBD

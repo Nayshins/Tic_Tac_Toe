@@ -1,5 +1,7 @@
 require "spec_helper"
 
+#TODO: Use a factory pattern instead of mutatiing instace variable state.
+
 describe "Computer" do
   
   before :all do

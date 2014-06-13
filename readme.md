@@ -17,7 +17,8 @@ $ rspec spec
 into your console.
 
 #TODO
-1. Extrapolate game class 
-2. Add alpha beta to the minimax algorithm
-3. add the functionality to play another human instead of the computer
-4. More TBD
+1. Extrapolate classes into the new Rules and Console classes
+2. Update and clean up tests
+3. Add alpha beta to the minimax algorithm
+4. add the functionality to play another human instead of the computer
+5. More TBD

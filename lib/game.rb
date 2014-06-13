@@ -2,7 +2,7 @@ class Game
   attr_accessor :human_player, :computer, :current_player, :board, :next_player
 
   @@move_map = {'1' => 0, '2' => 1, '3' => 2,
-                '4' => 3, '5' => 4, '6' => 6,
+                '4' => 3, '5' => 4, '6' => 5,
                 '7' => 6, '8' => 7, '9' => 8}
 
   def initialize

@@ -12,7 +12,7 @@ in your console.
 #Testing
 RSPEC is used for automated testing. To run the test suite, in the Tic_Tac_Toe directory enter:
 ```
-$ rspec spec
+$ rspec
 ```
 into your console.
 

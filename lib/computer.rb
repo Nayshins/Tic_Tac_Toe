@@ -46,7 +46,7 @@ class Computer
   def board_utility(board, team)
     if board.win_test(team)
       return 1.0
-    elsif board.win_test(team == 'X' ? 'O' : 'X')  #ugh hate this 
+    elsif board.win_test(get_opponent(team))  #ugh hate this 
       return -1.0
     else
       return 0.0

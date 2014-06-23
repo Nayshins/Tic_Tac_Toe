@@ -1,6 +1,6 @@
-require "factory_girl"
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
-
+require "factory_girl"
+FactoryGirl.find_definitions
 require 'board'
 require 'computer'
 require 'player'

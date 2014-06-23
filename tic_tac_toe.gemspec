@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["jnations1214@gmail.com"]
   spec.description   = "tic tac toe in ruby"
   spec.summary       = "tic tac toe against an unbeatable AI"
-  spec.homepage      = "www.jakenations.me"
+  spec.homepage      = "http://www.jakenations.me"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)

@@ -35,9 +35,9 @@ describe "Board" do
   describe "#get_cols" do
     it "returns a 2d array of column values" do
       board = build(:board, :vertical_win)
-      board.get_cols.should eq([['X','X','X'],
-                                 [' ',' ',' '],
-                                 [' ',' ',' ']])
+      expect(board.get_cols).to eq([['X','X','X'],
+                                    [' ',' ',' '],
+                                    [' ',' ',' ']])
     end
   end
 
@@ -52,14 +52,14 @@ describe "Board" do
   describe "#make_solutions" do
     it "returns a 2d array of all solutions" do
       board = build(:board, :horizontal_win)
-      board.make_solutions.should eq( [['X','X','X'],
-                                       [' ',' ',' '],
-                                       [' ',' ',' '],
-                                       ['X',' ',' '],
-                                       ['X',' ',' '],
-                                       ['X',' ',' '],
-                                       ['X',' ',' '],
-                                       ['X',' ',' ']])
+      expect(board.make_solutions).to eq( [['X','X','X'],
+                                           [' ',' ',' '],
+                                           [' ',' ',' '],
+                                           ['X',' ',' '],
+                                           ['X',' ',' '],
+                                           ['X',' ',' '],
+                                           ['X',' ',' '],
+                                           ['X',' ',' ']])
     end
   end
 
@@ -67,45 +67,45 @@ describe "Board" do
 
     it "returns true when 3 in a row are the same" do
       board = build(:board, :horizontal_win)
-      board.winner?.should be_truthy
+      expect(board.winner?).to be_truthy
     end
 
     it "returns true when 3 in a col are the same" do
       board = build(:board, :vertical_win)
-      board.winner?.should be_truthy
+      expect(board.winner?).to be_truthy
     end
 
     it "returns true when 3 in a diagonal are the same" do
       board = build(:board, :diagonal_win)
-      board.winner?.should be_truthy
+      expect(board.winner?).to be_truthy
     end
 
     it "returns false when there is no winner" do
       board = build(:board, :draw)
-      board.winner?.should be_falsey
+      expect(board.winner?).to be_falsey
     end
   end
 
   describe "#win_test" do
     it "returns true when there is a winner of a certain team" do
       board = build(:board, :horizontal_win)
-      board.win_test('X').should be_truthy
+      expect(board.win_test('X')).to be_truthy
     end
     it "returns false when there is not a winner" do
       board = build(:board, :empty)
-      board.win_test('X').should be_falsey
+      expect(board.win_test('X')).to be_falsey
     end
   end
 
   describe "#draw?" do
     it "returns true when there are no moves left" do
       board = build(:board, :draw)
-      board.draw?.should be_truthy
+      expect(board.draw?).to be_truthy
     end
 
     it "returns false if there are still open spaces" do
       board = build(:board, :empty)
-      board.draw?.should be_falsey
+      expect(board.draw?).to be_falsey
     end
   end
 
@@ -113,17 +113,17 @@ describe "Board" do
 
     it "returns true if there is a winner" do
       board = build(:board, :horizontal_win)
-      board.game_over?.should be_truthy
+      expect(board.game_over?).to be_truthy
     end
 
     it "returns true if there is a draw" do
       board = build(:board, :draw)
-      board.game_over?.should be_truthy
+      expect(board.game_over?).to be_truthy
     end
 
     it "returns false if there is no winer or draw" do
       board = build(:board, :empty)
-      board.draw?.should be_falsey
+      expect(board.draw?).to be_falsey
     end
   end
 end

@@ -1,6 +1,8 @@
 FactoryGirl.define do
   factory :board do
-    grid []
+    
+    grid nil
+
     trait :empty do
       grid [' '] * 9
     end
@@ -19,6 +21,10 @@ FactoryGirl.define do
 
     trait :draw do
       grid ['X','O','X','O','X','O','O','X','O']
+    end
+
+    trait :o_win do
+      grid ['O', 'O', 'O',' ', ' ', ' ',' ', ' ', ' ']
     end
   end
 end

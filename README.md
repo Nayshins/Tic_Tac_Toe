@@ -1,13 +1,14 @@
 # Tic Tac Toe in ruby
 This is an unbeatable game of Tic Tac Toe written in ruby using a minimax algorithm.
-
-#To play
-
-When in the Tic_Tac_Toe directory run:
+#Installing
+to install the gem clone the repository and run
 ```
 $ rake install
 ```
-then enter
+in your console.
+#To Play
+
+After installing the gem enter:
 ```
 $ play
 ```

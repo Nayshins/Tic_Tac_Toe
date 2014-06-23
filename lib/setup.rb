@@ -1,3 +1,2 @@
-require "board"
-require "game"
+
 

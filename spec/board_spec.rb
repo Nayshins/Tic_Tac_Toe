@@ -69,45 +69,45 @@ describe "Board" do
 
     it "returns true when 3 in a row are the same" do
       @board.grid = ['X','X','X',' ',' ',' ',' ',' ',' ']
-      @board.winner?.should be_true
+      @board.winner?.should be_truthy
     end
 
     it "returns true when 3 in a col are the same" do
       @board.grid = ['X',' ',' ','X',' ',' ','X',' ',' ']
-      @board.winner?.should be_true
+      @board.winner?.should be_truthy
     end
 
     it "returns true when 3 in a diagonal are the same" do
       @board.grid = ['X',' ',' ',' ','X',' ',' ',' ','X']
-      @board.winner?.should be_true
+      @board.winner?.should be_truthy
     end
 
     it "returns false when there is no winner" do
       @board.grid = ['X','O','X',' ',' ',' ',' ',' ',' ']
-      @board.winner?.should be_false
+      @board.winner?.should be_falsey
     end
   end
 
   describe "#win_test" do
     it "returns true when there is a winner of a certain team" do
       @board.grid = ['X','X','X',' ',' ',' ',' ',' ',' ']
-      @board.win_test('X').should be_true
+      @board.win_test('X').should be_truthy
     end
     it "returns false when there is not a winner" do
       @board.grid = ['X','O','X',' ',' ',' ',' ',' ',' ']
-      @board.win_test('X').should be_false
+      @board.win_test('X').should be_falsey
     end
   end
 
   describe "#draw?" do
     it "returns true when there are no moves left" do
       @board.grid = ['X','O','X','O','X','O','O','X','O']
-      @board.draw?.should be_true
+      @board.draw?.should be_truthy
     end
 
     it "returns false if there are still open spaces" do
       @board.grid = ['X','O','X',' ',' ',' ',' ',' ',' ']
-      @board.draw?.should be_false
+      @board.draw?.should be_falsey
     end
   end
 
@@ -115,17 +115,17 @@ describe "Board" do
 
     it "returns true if there is a winner" do
       @board.grid = ['X','X','X',' ',' ',' ',' ',' ',' ']
-      @board.game_over?.should be_true
+      @board.game_over?.should be_truthy
     end
 
     it "returns true if there is a draw" do
       @board.grid = ['X','O','X','O','X','O','O','X','O']
-      @board.game_over?.should be_true
+      @board.game_over?.should be_truthy
     end
 
     it "returns false if there is no winer or draw" do
       @board.grid = ['X','O','X',' ',' ',' ',' ',' ',' ']
-      @board.draw?.should be_false
+      @board.draw?.should be_falsey
     end
   end
 end

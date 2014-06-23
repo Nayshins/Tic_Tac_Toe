@@ -1,4 +1,7 @@
 class Game
+
+  # game loop
+  # 
   attr_accessor :human_player, :computer, :current_player, :board, :next_player
 
   @@move_map = {'1' => 0, '2' => 1, '3' => 2,

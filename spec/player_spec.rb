@@ -1,12 +1,12 @@
 require "spec_helper"
 
 describe "Player" do
-  before :each do
-    @player = Player.new('X')
-  end
+  
+  let(:player) { Player.new('X') }
+  
   describe "#initialize" do
     it "is initialized with a team" do
-      @player.team.should eq('X')
+      expect(player.team).to eq('X')
     end
   end
 end

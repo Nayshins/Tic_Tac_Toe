@@ -9,7 +9,7 @@ class Computer
     opponent = get_opponent(team)
     best_score = -1.0/0
     if board.game_over?
-      return board_utility(board, team) / depth
+      return board_score(board, team) / depth
     else
       board.get_moves.each do |move|
         board.set_move(move,team)
@@ -43,7 +43,7 @@ class Computer
     team == 'X' ? 'O' : 'X'
   end
 
-  def board_utility(board, team)
+  def board_score(board, team)
     if board.win_test(team)
       return 1.0
     elsif board.win_test(get_opponent(team))  #ugh hate this 

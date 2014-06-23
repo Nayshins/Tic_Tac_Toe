@@ -1,10 +1,10 @@
 require "spec_helper"
 
-#TODO: Use a factory pattern instead of mutatiing instace variable state.
+#TODO: Use a factory pattern instead of mutating instace variable state.
 
 describe "Computer" do
   
-  before :all do
+  before :each do
     @computer = Computer.new('X')
     @board = Board.new
   end
@@ -15,25 +15,25 @@ describe "Computer" do
     end
   end
 
-  describe "#board_utility" do
+  describe "#board_score" do
     it "returns 1 if X wins" do
       @board.grid = ['X', 'X', 'X', 
                      ' ', ' ', ' ', 
                      ' ', ' ', ' ']
-      @computer.board_utility(@board, 'X').should eq(1)
+      @computer.board_score(@board, 'X').should eq(1)
     end
 
     it "returns -1 if O wins" do
       @board.grid = ['O', 'O', 'O', 
                      ' ', ' ', ' ', 
                      ' ', ' ', ' ']
-      @computer.board_utility(@board, 'X').should eq(-1)
+      @computer.board_score(@board, 'X').should eq(-1)
     end
     it "returns 0 if game is tied" do
       @board.grid = ['O', 'O', 'X', 
                      'X', 'O', 'O', 
                      'O', 'X', 'X']
-      @computer.board_utility(@board, 'O').should eq(0)
+      @computer.board_score(@board, 'O').should eq(0)
     end
   end
 

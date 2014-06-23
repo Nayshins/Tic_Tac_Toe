@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe "Player" do
-  before :all do
+  before :each do
     @player = Player.new('X')
   end
   describe "#initialize" do

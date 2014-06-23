@@ -1,23 +1,7 @@
 require "spec_helper"
 describe "Board" do
-  before :all do
+  before :each do
     @board = Board.new
-  end
-  describe "#initialize" do
-    it "initializes with a grid variable" do
-      @board.grid.should_not be_nil
-    end
-    describe "#grid" do
-      it "is an array" do
-        @board.grid.should be_an_instance_of Array
-      end
-      it "has a length of 9" do
-        @board.grid.length.should eq(9)
-      end
-      it "all elements are a blank space" do
-        @board.grid.each { |e| e.should eq(' ') }
-      end
-    end
   end
 
   describe "#locations" do

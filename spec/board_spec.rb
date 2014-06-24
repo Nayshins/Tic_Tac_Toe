@@ -23,32 +23,6 @@ describe "Board" do
     end
   end
 
-  describe "#get_rows" do
-    it "returns 2d array of row values" do
-      board = build(:board, :horizontal_win)
-      board.get_rows.should eq([['X','X','X'],
-                                 [' ',' ',' '],
-                                 [' ',' ',' ']])
-    end
-  end
-
-  describe "#get_cols" do
-    it "returns a 2d array of column values" do
-      board = build(:board, :vertical_win)
-      expect(board.get_cols).to eq([['X','X','X'],
-                                    [' ',' ',' '],
-                                    [' ',' ',' ']])
-    end
-  end
-
-  describe "#get_diagonals" do
-    it "returns a 2d array of the diagonal values" do
-      board = build(:board, :diagonal_win)
-      board.get_diagonals.should eq([['X','X','X'],
-                                      [' ','X',' ']])
-    end
-  end
-
   describe "#make_solutions" do
     it "returns a 2d array of all solutions" do
       board = build(:board, :horizontal_win)

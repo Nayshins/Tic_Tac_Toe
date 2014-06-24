@@ -5,5 +5,7 @@ require 'board'
 require 'computer'
 require 'player'
 require 'game'
+require 'setup'
+require 'console'
 
-Game.new.start_game
+Setup.new.new_game

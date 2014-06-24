@@ -8,39 +8,13 @@ class Game
                 '4' => 3, '5' => 4, '6' => 5,
                 '7' => 6, '8' => 7, '9' => 8}
 
-  def initialize
-    @board = Board.new
-  end
-
-  def start_game
-    puts "Welcome to Unbeatable Tic Tac Toe..."
-    select_team
-    first?
-    game_loop
-  end
-
-  def select_team
-    team = { '1' => 'X', '2' => 'O'}
-    puts "Please enter 1 to be X or 2 to be O"
-    valid_entry = false
-    until valid_entry
-      entry = gets.chomp
-      if team[entry] == 'X'
-        @human_player = Player.new('X')
-        @computer = Computer.new('O')
-        valid_entry = true
-      elsif team[entry] == 'O'
-        @human_player = Player.new('O')
-        @computer = Computer.new('X')
-        valid_entry = true  
-      else
-        puts "Invalid entry, Please enter 1 to be X and 2 to be O"  
-      end 
-    end
-  end
-
-  def first?
-    @current_player, @next_player = human_player, computer
+  def initialize(board, human_player, computer,
+                 current_player, next_player)
+    @board = board
+    @human_player = human_player
+    @computer = computer
+    @current_player = current_player
+    @next_player = next_player
   end
 
   def game_loop

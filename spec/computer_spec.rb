@@ -1,7 +1,7 @@
 require "spec_helper"
 
 #TODO: Use a factory pattern instead of mutating instace variable state.
-
+INFINITY = 1.0/0.0
 describe "Computer" do
     
   let(:computer) { Computer.new('X') }
@@ -30,24 +30,24 @@ describe "Computer" do
     end
   end
 
-  describe "#minimax" do
+  describe "#negamax" do
     it "returns a score for board and marker" do
       rules.board = build(:board, :grid =>['O', 'O', 'X', 
                                      'X', 'O', 'O', 
                                      'O', 'X', 'X'])
-      expect(computer.minimax(rules, 'O',1)).to eq(0)
+      expect(computer.negamax(rules, 'O',1,INFINITY,-INFINITY)).to eq(0)
     end
     it "returns a 1 for a winning move" do
       rules.board = build(:board, :grid => ['O', 'O', 'X', 
                                       'X', 'X', 'O', 
                                       ' ', 'X', 'O'])
-      expect(computer.minimax(rules, 'X',0)).to eq(1)               
+      expect(computer.negamax(rules, 'X',0,INFINITY,-INFINITY)).to eq(1)               
     end
     it "returns 0 for a tie game move" do
       rules.board = build(:board, :grid =>['O', 'X', 'X', 
                                      'X', 'O', 'O', 
                                      ' ', 'X', 'X'])
-      expect(computer.minimax(rules, 'O',0)).to eq(0)               
+      expect(computer.negamax(rules, 'O',0,INFINITY,-INFINITY)).to eq(0)               
     end
   end
 
@@ -61,14 +61,14 @@ describe "Computer" do
 
     it "blocks a 3 in a row" do
       rules.board = build(:board, :grid =>[' ', ' ', 'O', 
-                                     ' ', 'X', ' ', 
-                                     ' ', 'X', ' '])
+                                           ' ', 'X', ' ', 
+                                           ' ', 'X', ' '])
       expect(computer.make_move(rules, 'O')).to eq(1) 
     end
     it "completes the game instead of blocking" do
       rules.board = build(:board, :grid =>['O', ' ', 'O', 
-                                     ' ', ' ', ' ', 
-                                     'X', 'X', ' '])
+                                           ' ', ' ', ' ', 
+                                           'X', 'X', ' '])
       expect(computer.make_move(rules, 'O')).to eq(1) 
     end
     it "completes three in a row ahead of a tie" do

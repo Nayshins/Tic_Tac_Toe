@@ -22,7 +22,7 @@ $ rspec
 into your console.
 
 #TODO
-1. ~~Abstract game into ~~setup~~ and console, and extrapolate board into rules~~
+1. ~~Abstract game into setup and console, and extrapolate board into rules~~
 2. ~~Update to expects and clean up tests~~
 3. Add alpha beta to the minimax algorithm
 4. add the functionality to play another human instead of the computer

@@ -7,5 +7,6 @@ require 'player'
 require 'game'
 require 'setup'
 require 'console'
+require 'rules'
 
 Setup.new.new_game

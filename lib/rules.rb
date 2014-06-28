@@ -8,7 +8,7 @@ class Rules
   end
 
   def winner?
-    make_solutions.each do |solution|
+    board.make_solutions.each do |solution|
       next if solution[0] == ' '
       return true if solution.all? { |ele| solution[0] == ele }
     end
@@ -16,7 +16,7 @@ class Rules
   end
 
   def win_test(team)
-    make_solutions.each do |solution|
+    board.make_solutions.each do |solution|
       next if solution[0] == ' ' || solution[0] != team
       return true if solution.all? { |ele| team == ele }
     end
@@ -24,7 +24,7 @@ class Rules
   end
 
   def draw?
-    return true if get_moves == []
+    return true if board.get_moves == []
     false
   end
 

@@ -1,5 +1,5 @@
 class Board
-  attr_accessor :grid, :solutions
+  attr_accessor :grid
   
   def initialize
     @grid = [' '] * 9
@@ -35,17 +35,5 @@ class Board
 
   def get_diagonals
     [[grid[0], grid[4], grid[8]], [grid[2], grid[4], grid[6]]]
-  end
-
-  def print_grid
-    puts 
-    puts " #{grid[0]} | #{grid[1]} | #{grid[2]}"
-    puts "---+---+---"
-    puts " #{grid[3]} | #{grid[4]} | #{grid[5]}"
-    puts "---+---+---"
-    puts " #{grid[6]} | #{grid[7]} | #{grid[8]}"
-    puts
-  end
-
- 
+  end 
 end

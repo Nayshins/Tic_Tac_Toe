@@ -5,16 +5,16 @@ class Computer
     @team = team
   end
 
-  def minimax(board,team,depth)
+  def minimax(rules,team,depth)
     opponent = get_opponent(team)
     best_score = -1.0/0
-    if board.game_over?
-      return board_score(board, team) / depth
+    if rules.game_over?
+      return board_score(rules, team) / depth
     else
-      board.get_moves.each do |move|
-        board.set_move(move,team)
-        score = -minimax(board, opponent, depth + 1)
-        board.undo_move(move)
+      rules.board.get_moves.each do |move|
+        rules.board.set_move(move,team)
+        score = -minimax(rules, opponent, depth + 1)
+        rules.board.undo_move(move)
         if score > best_score
           best_score = score
         end
@@ -23,14 +23,14 @@ class Computer
     end
   end
 
-  def make_move(board, team)
+  def make_move(rules, team)
     best_move = nil
     best_score = -1.0/0
     opponent = get_opponent(team)
-    board.get_moves.each do |move|
-      board.set_move(move,team)
-      score = -minimax(board, opponent, 1)
-      board.undo_move(move)
+    rules.board.get_moves.each do |move|
+      rules.board.set_move(move,team)
+      score = -minimax(rules, opponent, 1)
+      rules.board.undo_move(move)
       if score > best_score
         best_score = score
         best_move = move
@@ -43,10 +43,10 @@ class Computer
     team == 'X' ? 'O' : 'X'
   end
 
-  def board_score(board, team)
-    if board.win_test(team)
+  def board_score(rules, team)
+    if rules.win_test(team)
       return 1.0
-    elsif board.win_test(get_opponent(team))  #ugh hate this 
+    elsif rules.win_test(get_opponent(team))  #ugh hate this 
       return -1.0
     else
       return 0.0

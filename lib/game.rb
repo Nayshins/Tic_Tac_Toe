@@ -2,15 +2,17 @@ class Game
 
   # game loop
   # 
-  attr_accessor :human_player, :computer, :current_player, :board, :next_player
+  attr_accessor :human_player, :computer, :current_player,
+                :rules, :next_player, :ui
 
-  @@move_map = {'1' => 0, '2' => 1, '3' => 2,
-                '4' => 3, '5' => 4, '6' => 5,
-                '7' => 6, '8' => 7, '9' => 8}
+  @@move_map = { '1' => 0, '2' => 1, '3' => 2,
+                 '4' => 3, '5' => 4, '6' => 5,
+                 '7' => 6, '8' => 7, '9' => 8 }
 
-  def initialize(board, human_player, computer,
+  def initialize(ui, rules, human_player, computer,
                  current_player, next_player)
-    @board = board
+    @ui = ui
+    @rules = rules
     @human_player = human_player
     @computer = computer
     @current_player = current_player
@@ -18,7 +20,7 @@ class Game
   end
 
   def game_loop
-    while board.game_over? == false  
+    while rules.game_over? == false  
       if current_player == human_player
         get_human_move
         switch_players
@@ -31,29 +33,29 @@ class Game
   end
 
   def get_human_move
-    board.print_grid
-    puts "select a square by entering 1-9"
+    ui.print_board
+    ui.print_instructions
     valid = false
     until valid 
-      move = gets.chomp
+      move = ui.get_move
       return valid = true if validate_move(move) 
     end
   end
 
   def validate_move(move)
-    if board.get_moves.include?(@@move_map[move])
-      board.set_move(@@move_map[move], human_player.team)
+    if rules.board.get_moves.include?(@@move_map[move])
+      rules.board.set_move(@@move_map[move], human_player.team)
     else
-      puts "invalid move enter a different number"
+      ui.print_invalid_move
       false
     end  
   end
 
   def computer_move
-    board.print_grid
-    puts "Computer is making its move..."
-    move = computer.make_move(board,computer.team)
-    board.set_move(move,computer.team)
+    ui.print_board
+    ui.print_computer_move
+    move = computer.make_move(rules,computer.team)
+    rules.board.set_move(move,computer.team)
   end
 
   def switch_players
@@ -61,12 +63,12 @@ class Game
   end
 
   def game_over
-    if board.game_over? == :winner
-      board.print_grid
-      puts "#{next_player.team} is the winner!"
+    if rules.game_over? == :winner
+      ui.print_board
+      ui.print_winner(next_player.team)
     else
-      board.print_grid
-      puts "Draw!"
+      ui.print_board
+      ui.declare_draw
     end  
   end
 end

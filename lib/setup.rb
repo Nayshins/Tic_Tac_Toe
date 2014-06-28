@@ -4,10 +4,12 @@ class Setup
   # select team
   # start game
 
-  attr_accessor :board, :human_player, :computer_player, :current_player, :next_player, :game
+  attr_accessor :board, :rules, :human_player, :computer_player, 
+                :current_player, :next_player, :game, :ui
   def initialize
     @board = Board.new
-    @ui = Console.new
+    @rules = Rules.new(board)
+    @ui = Console.new(board)
   end
 
   def new_game
@@ -16,10 +18,10 @@ class Setup
   end
 
   def setup_game
-    puts "Welcome to Unbeatable Tic Tac Toe..."
+    ui.print_welcome
     select_team
     first
-    @game = Game.new(board,human_player,computer_player, 
+    @game = Game.new(ui,rules,human_player,computer_player, 
                     current_player, next_player)
   end
 
@@ -29,10 +31,10 @@ class Setup
 
   def select_team
     team = { '1' => 'X', '2' => 'O'}
-    puts "Please enter 1 to be X or 2 to be O"
+    ui.print_pick_team
     valid_entry = false
     until valid_entry
-      entry = gets.chomp
+      entry = ui.get_team
       if team[entry] == 'X'
         @human_player = Player.new('X')
         @computer_player = Computer.new('O')
@@ -42,7 +44,7 @@ class Setup
         @computer_player = Computer.new('X')
         valid_entry = true  
       else
-        puts "Invalid entry, Please enter 1 to be X and 2 to be O"  
+        ui.print_invalid_entry
       end 
     end
   end
@@ -56,6 +58,5 @@ class Setup
       @next_player = human_player
     end  
   end
-
 end
 

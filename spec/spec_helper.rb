@@ -4,7 +4,8 @@ require 'board'
 require 'computer'
 require 'player'
 require 'game'
-require "setup"
+require 'setup'
+require 'rules'
 
 FactoryGirl.find_definitions # was not working without this
 RSpec.configure do |config|

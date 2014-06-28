@@ -39,14 +39,14 @@ describe "Computer" do
     end
     it "returns a 1 for a winning move" do
       rules.board = build(:board, :grid => ['O', 'O', 'X', 
-                                      'X', 'X', 'O', 
-                                      ' ', 'X', 'O'])
+                                            'X', 'X', 'O', 
+                                            ' ', 'X', 'O'])
       expect(computer.negamax(rules, 'X',0,INFINITY,-INFINITY)).to eq(1)               
     end
     it "returns 0 for a tie game move" do
       rules.board = build(:board, :grid =>['O', 'X', 'X', 
-                                     'X', 'O', 'O', 
-                                     ' ', 'X', 'X'])
+                                           'X', 'O', 'O', 
+                                           ' ', 'X', 'X'])
       expect(computer.negamax(rules, 'O',0,INFINITY,-INFINITY)).to eq(0)               
     end
   end
@@ -60,10 +60,10 @@ describe "Computer" do
     end
 
     it "blocks a 3 in a row" do
-      rules.board = build(:board, :grid =>[' ', ' ', 'O', 
+      rules.board = build(:board, :grid =>['O', ' ', ' ', 
                                            ' ', 'X', ' ', 
-                                           ' ', 'X', ' '])
-      expect(computer.make_move(rules, 'O')).to eq(1) 
+                                           'X', ' ', ' '])
+      expect(computer.make_move(rules, 'O')).to eq(2) 
     end
     it "completes the game instead of blocking" do
       rules.board = build(:board, :grid =>['O', ' ', 'O', 

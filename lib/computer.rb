@@ -13,7 +13,7 @@ class Computer
     else
       rules.board.get_moves.each do |move|
         rules.board.set_move(move,team)
-        score = -negamax(rules, opponent, depth + 1,beta,alpha)
+        score = -negamax(rules, opponent, depth + 1,-beta,-alpha)
         rules.board.undo_move(move)
         if score > best_score
           best_score = score

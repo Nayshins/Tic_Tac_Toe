@@ -54,8 +54,8 @@ describe "Computer" do
   describe "#make_move" do
     it "returns cell that makes 3 in a row" do
       rules.board = build(:board, :grid =>['O', 'O', ' ', 
-                                     'X', 'X', ' ', 
-                                     ' ', 'O', 'X'])
+                                           'X', 'X', ' ', 
+                                           ' ', 'O', 'X'])
       expect(computer.make_move(rules, 'O')).to eq(2)                
     end
 
@@ -73,8 +73,8 @@ describe "Computer" do
     end
     it "completes three in a row ahead of a tie" do
       rules.board = build(:board, :grid =>['O', 'X', ' ', 
-                                     'X', 'O', 'X', 
-                                     'X', 'X', ' '])
+                                           'X', 'O', 'X', 
+                                           'X', 'X', ' '])
       expect(computer.make_move(rules, 'O')).to eq(8) 
     end
   end

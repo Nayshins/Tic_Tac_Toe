@@ -52,7 +52,7 @@ class Computer
   def board_score(rules, team)
     if rules.win_test(team)
       return 1.0
-    elsif rules.win_test(get_opponent(team))  #ugh hate this 
+    elsif rules.win_test(get_opponent(team))  
       return -1.0
     else
       return 0.0

@@ -4,8 +4,7 @@ class Setup
   # select team
   # start game
 
-  attr_accessor :board, :rules, :human_player, :computer, 
-                :current_player, :next_player, :game, :ui
+  attr_accessor :board, :rules, :human_player, :computer, :game, :ui
   def initialize
     @board = Board.new
     @rules = Rules.new(board)
@@ -25,7 +24,7 @@ class Setup
   end
 
   def start_game
-    @game.game_loop
+    game.game_loop
   end
 
   def select_team

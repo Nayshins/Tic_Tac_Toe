@@ -41,18 +41,22 @@ class Game
 
   def validate_move(move)
     if rules.board.get_moves.include?(@@move_map[move])
-      rules.board.set_move(@@move_map[move], human_player.team)
+      set_move(@@move_map[move], human_player.team)
     else
       ui.print_invalid_move
       false
     end  
   end
 
+  def set_move(move, team)
+    rules.board.set_move(move, team)
+  end
+
   def computer_move
     ui.print_board
     ui.print_computer_move
     move = computer.make_move(rules,computer.team)
-    rules.board.set_move(move,computer.team)
+    set_move(move,computer.team)
   end
 
   def switch_players

@@ -1,6 +1,8 @@
 class Computer
   attr_accessor :team, :current_player
+  
   INFINITY = 1.0/0.0
+  
   def initialize(team)
     @team = team
     @current_player = nil

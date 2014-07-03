@@ -4,7 +4,7 @@ class Setup
   # select team
   # start game
 
-  attr_accessor :board, :rules, :human_player, :computer_player, 
+  attr_accessor :board, :rules, :human_player, :computer, 
                 :current_player, :next_player, :game, :ui
   def initialize
     @board = Board.new

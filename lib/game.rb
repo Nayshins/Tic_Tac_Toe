@@ -68,7 +68,7 @@ class Game
   def game_over
     if rules.game_over? == :winner
       ui.print_board
-      ui.print_winner(next_player.team)
+      ui.print_winner(rules.winning_team)
     else
       ui.print_board
       ui.declare_draw

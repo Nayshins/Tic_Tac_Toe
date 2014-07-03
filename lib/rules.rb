@@ -1,7 +1,7 @@
 # TODO: Move all methods that pertain to the rules to this class
 class Rules
   
-  attr_accessor :board
+  attr_accessor :board, :winning_team
 
   def initialize(board)
     @board = board
@@ -10,7 +10,7 @@ class Rules
   def winner?
     board.make_solutions.each do |solution|
       next if solution[0] == ' '
-      return { winner: true, team: solution[0] } if solution.all? { |ele| solution[0] == ele }
+      return @winning_team = solution[0] if solution.all? { |ele| solution[0] == ele }
     end
     false
   end
@@ -29,7 +29,7 @@ class Rules
   end
 
   def game_over?
-    return winner? if winner? 
+    return :winner if winner?
     return :draw if draw?
     false
   end

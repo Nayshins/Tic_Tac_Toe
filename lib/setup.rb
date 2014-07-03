@@ -21,8 +21,7 @@ class Setup
     ui.print_welcome
     select_team
     first
-    @game = Game.new(ui,rules,human_player,computer_player, 
-                    current_player, next_player)
+    @game = Game.new(ui,rules,human_player,computer)
   end
 
   def start_game
@@ -37,11 +36,11 @@ class Setup
       entry = ui.get_team
       if team[entry] == 'X'
         @human_player = Player.new('X')
-        @computer_player = Computer.new('O')
+        @computer = Computer.new('O')
         valid_entry = true
       elsif team[entry] == 'O'
         @human_player = Player.new('O')
-        @computer_player = Computer.new('X')
+        @computer = Computer.new('X')
         valid_entry = true  
       else
         ui.print_invalid_entry
@@ -51,11 +50,11 @@ class Setup
 
   def first
     if human_player.team == 'X'
-      @current_player = human_player
-      @next_player = computer_player
+      human_player.current_player = true
+      computer.current_player = false
     else
-      @current_player = computer_player
-      @next_player = human_player
+      computer.current_player = true
+      human_player.current_player = false
     end  
   end
 end

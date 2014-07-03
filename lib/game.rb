@@ -9,19 +9,16 @@ class Game
                  '4' => 3, '5' => 4, '6' => 5,
                  '7' => 6, '8' => 7, '9' => 8 }
 
-  def initialize(ui, rules, human_player, computer,
-                 current_player, next_player)
+  def initialize(ui, rules, human_player, computer)
     @ui = ui
     @rules = rules
     @human_player = human_player
     @computer = computer
-    @current_player = current_player
-    @next_player = next_player
   end
 
   def game_loop
     while rules.game_over? == false  
-      if current_player == human_player
+      if human_player.current_player
         get_human_move
         switch_players
       else
@@ -59,7 +56,13 @@ class Game
   end
 
   def switch_players
-    @current_player, @next_player = @next_player, @current_player
+    if human_player.current_player
+      human_player.current_player = false
+      computer.current_player = true
+    else
+      human_player.current_player = true
+      computer.current_player = false
+    end
   end
 
   def game_over

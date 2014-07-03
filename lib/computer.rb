@@ -3,6 +3,7 @@ class Computer
   INFINITY = 1.0/0.0
   def initialize(team)
     @team = team
+    @current_player = nil
   end
 
   def negamax(rules,team,depth,alpha,beta)

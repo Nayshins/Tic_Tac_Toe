@@ -6,6 +6,7 @@ require 'player'
 require 'game'
 require 'setup'
 require 'rules'
+require 'console'
 
 FactoryGirl.find_definitions # was not working without this
 RSpec.configure do |config|

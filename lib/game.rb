@@ -1,6 +1,5 @@
 class Game
-  attr_accessor :human_player, :computer, :current_player,
-                :rules, :next_player, :ui
+  attr_accessor :human_player, :computer,:rules, :next_player, :ui
 
   @@move_map = { '1' => 0, '2' => 1, '3' => 2,
                  '4' => 3, '5' => 4, '6' => 5,

@@ -1,8 +1,4 @@
 class Setup
-  # needs board
-  # setup methods
-  # select team
-  # start game
 
   attr_accessor :board, :rules, :human_player, :computer, :game, :ui
   def initialize

@@ -1,7 +1,4 @@
 class Game
-
-  # game loop
-  # 
   attr_accessor :human_player, :computer, :current_player,
                 :rules, :next_player, :ui
 

@@ -1,5 +1,5 @@
 # Tic Tac Toe in ruby
-This is an unbeatable game of Tic Tac Toe written in ruby using a type of minimax algorithm called negamax.
+This is an unbeatable game of Tic Tac Toe written in ruby using a Negamax algorithm.
 #Installing
 to install the gem clone the repository and run
 ```
